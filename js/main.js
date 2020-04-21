@@ -30,7 +30,7 @@ const getRandomPhraseAsArray = arr => {
 const phraseArray = getRandomPhraseAsArray(phrases);
 
 
-const addPhraseToDisplay = (arr) => {
+const addPhraseToDisplay = arr => {
  // do stuff any arr that is passed in, and add to `#phrase ul`
  const ul = phrase.querySelector('ul');
     for (i = 0; i < arr.length; i++) {
