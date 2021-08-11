@@ -16,7 +16,7 @@ startBtn.addEventListener('click', () => {
 const phrases = [
   "beep boop",
   "coding",
-  "oh honey",
+  "hello there",
   "boolean value",
   "team treehouse"
 ];
@@ -34,53 +34,51 @@ const addPhraseToDisplay = arr => {
  // do stuff any arr that is passed in, and add to `#phrase ul`
  const ul = phrase.querySelector('ul');
     for (i = 0; i < arr.length; i++) {
-      let li = document.createElement('li');
+      const li = document.createElement('li');
       li.textContent = arr[i];
       ul.appendChild(li);
-    }
 
       if(li != " "){
         li.classList.add("letter");
+      } else {
+        li.classList.add("space");
+      }
+        }
 
-          }  else{
-          li.classList.add("space");
-          }
-
-          return ul;
         }
 
 
-addPhrasetoDisplay(phraseArray);
+addPhraseToDisplay(phraseArray);
 
-const checkLetter = (clicked) =>{
-  const currentPhrase = document.getElementsByClassName('letter');
+const checkLetter = clicked => {
+  let currentPhrase = document.getElementsByClassName('letter');
   let match = null;
 
-    for(let i=0; i < currentPhrase.length; i ++){
-            if(currentPhrase[i].innerHTML.toLowerCase() === clicked){
+    for(let i=0; i < currentPhrase.length; i++){
+      if(currentPhrase[i].innerHTML.toLowerCase() === clicked){
+        let match = clicked;
+        currentPhrase[i].classList.add("show");
 
-                let match = clicked;
-                currentPhrase[i].classList.add("show");
+      }
+    }
+  return match;
+}
 
-            }
-              return match;
-            }
-        }
+keyboard.addEventListener('click', (e) => {
 
-keyboard.addEventListener("click", (e) => {
-  if(e.target.tagName == 'BUTTON'){
+  let letterFound = checkLetter(e.target.innerHTML);
 
-        let letterFound = checkLetter(e.target.innerHTML);
+  if(e.target.tagName === 'BUTTON'){
+
         e.target.classList.add("chosen");
         e.target.disabled = true;
 
-
-
-        if(!letterFound) {
-
-            incorrectGuesses += 1;
-
 }
+
+        if(letterFound === null) {
+          document.querySelectorAll('img')[missed].src = "images/lostHeart.png";
+          missed += 1;
+
 }
 });
 
@@ -90,7 +88,7 @@ const checkWin = () =>{
       overlay.style.display = 'flex';
 
 }
-    else if(incorrectGuesses >= 5) {
+    else if(missed >= 5) {
       overlay.textContent = "Game Over";
       overlay.style.display = 'flex';
 
