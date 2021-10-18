@@ -5,6 +5,7 @@ const keyboard = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 const overlay = document.getElementById('overlay');
 const startBtn = document.getElementsByClassName('btn__reset')[0];
+const ul = phrase.querySelector('ul');
 let missed = 0;
 
 startBtn.addEventListener('click', () => {
@@ -32,7 +33,6 @@ const phraseArray = getRandomPhraseAsArray(phrases);
 
 const addPhraseToDisplay = arr => {
  // do stuff any arr that is passed in, and add to `#phrase ul`
- const ul = phrase.querySelector('ul');
     for (i = 0; i < arr.length; i++) {
       const li = document.createElement('li');
       li.textContent = arr[i];
@@ -82,14 +82,38 @@ keyboard.addEventListener('click', (e) => {
 const checkWin = () => {
   let classShow = document.querySelectorAll('.show');
   let classLetter = document.querySelectorAll('.letter');
+  let text = document.querySelector('.title')
   if(classShow.length === classLetter.length){
-    overlay.className = ("win");
-    overlay.h2.textContent = "You Win";
+    overlay.className = ('win');
+    text.textContent = "You Win";
     overlay.style.display = 'flex';
+    startBtn.textContent = "Restart";
+    resetGame();
   } else if (missed > 4){
     overlay.className = ('lose');
-    overlay.h2.textContent = "Game Over";
+    text.textContent = "Game Over";
     overlay.style.display = 'flex';
+    startBtn.textContent = "Try Again";
+    resetGame();
+  }
+
+}
+
+const resetGame = () => {
+
+  ul.textContent = "";
+  missed = 0;
+  const lives = document.querySelectorAll('img');
+    for (let i = 0; i < lives.length; i++) {
+      lives[i].src = "images/liveHeart.png";
+    }
+  const phraseArray = getRandomPhraseAsArray(phrases);
+  addPhraseToDisplay(phraseArray);
+
+  const chosenLetters = document.querySelectorAll('.chosen');
+  for(let i = 0; i < chosenLetters.length; i++) {
+    chosenLetters[i].classList.remove('chosen');
+    chosenLetters[i].disabled = false;
   }
 
 }
