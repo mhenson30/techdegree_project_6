@@ -56,7 +56,6 @@ const checkLetter = clicked => {
       if(currentPhrase[i].innerHTML.toLowerCase() === clicked){
         match = clicked;
         currentPhrase[i].classList.add("show");
-        i++;
       }
     }
     return match;
@@ -75,19 +74,20 @@ keyboard.addEventListener('click', (e) => {
 
     if(letterFound === null) {
         document.querySelectorAll('img')[missed].src = "images/lostHeart.png";
-        missed =+ 1;
+        missed += 1;
     }
+    checkWin();
 });
 
 const checkWin = () => {
   let classShow = document.querySelectorAll('.show');
   let classLetter = document.querySelectorAll('.letter');
   if(classShow.length === classLetter.length){
-    overlay.className = "win";
+    overlay.className = ("win");
     overlay.h2.textContent = "You Win";
     overlay.style.display = 'flex';
   } else if (missed > 4){
-    overlay.className = "lose";
+    overlay.className = ('lose');
     overlay.h2.textContent = "Game Over";
     overlay.style.display = 'flex';
   }
