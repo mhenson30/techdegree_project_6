@@ -38,14 +38,13 @@ const addPhraseToDisplay = arr => {
       li.textContent = arr[i];
       ul.appendChild(li);
 
-      if(li != " "){
+      if(li.textContent != " "){
         li.classList.add("letter");
       } else {
         li.classList.add("space");
       }
         }
-
-        }
+  }
 
 
 addPhraseToDisplay(phraseArray);
@@ -55,12 +54,12 @@ const checkLetter = clicked => {
   let match = null;
     for(let i=0; i < currentPhrase.length; i++){
       if(currentPhrase[i].innerHTML.toLowerCase() === clicked){
-        let match = clicked;
+        match = clicked;
         currentPhrase[i].classList.add("show");
         i++;
       }
     }
-  return match;
+    return match;
 }
 
 keyboard.addEventListener('click', (e) => {
@@ -84,7 +83,13 @@ const checkWin = () => {
   let classShow = document.querySelectorAll('.show');
   let classLetter = document.querySelectorAll('.letter');
   if(classShow.length === classLetter.length){
-    s
+    overlay.className = "win";
+    overlay.h2.textContent = "You Win";
+    overlay.style.display = 'flex';
+  } else if (missed > 4){
+    overlay.className = "lose";
+    overlay.h2.textContent = "Game Over";
+    overlay.style.display = 'flex';
   }
 
 }
