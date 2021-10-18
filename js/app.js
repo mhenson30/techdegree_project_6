@@ -79,3 +79,12 @@ keyboard.addEventListener('click', (e) => {
         missed =+ 1;
     }
 });
+
+const checkWin = () => {
+  let classShow = document.querySelectorAll('.show');
+  let classLetter = document.querySelectorAll('.letter');
+  if(classShow.length === classLetter.length){
+    s
+  }
+
+}
