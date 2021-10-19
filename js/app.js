@@ -72,7 +72,7 @@ keyboard.addEventListener('click', (e) => {
 
 }
 
-    if(letterFound === null) {
+    if(e.target.tagName === 'BUTTON' && letterFound === null) {
         document.querySelectorAll('img')[missed].src = "images/lostHeart.png";
         missed += 1;
     }
